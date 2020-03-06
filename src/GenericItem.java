@@ -1,9 +1,36 @@
 class GenericItem implements Cloneable {
+    static int currentID = 0;
     public int ID;
     public String name;
     public float price;
     public Category category = Category.GENERAL;
     private GenericItem analog = null;
+
+    public GenericItem(String name, float price, Category category) {
+        this.name = name;
+        this.price = price;
+        this.category = category;
+        this.ID = GenericItem.currentID++;
+    }
+
+    public GenericItem(String name, float price, GenericItem analog) {
+        this.name = name;
+        this.price = price;
+        this.analog = analog;
+        this.ID = GenericItem.currentID++;
+    }
+
+    public GenericItem(String name, float price) {
+        this.name = name;
+        this.price = price;
+        this.ID = GenericItem.currentID++;
+    }
+
+    public GenericItem() {
+        this.ID = GenericItem.currentID++;
+        this.name = "";
+        this.price = 0.0f;
+    }
 
     public GenericItem(int ID, String name, float price) {
         this.ID = ID;

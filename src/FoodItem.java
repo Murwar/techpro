@@ -6,11 +6,19 @@ class FoodItem extends GenericItem {
     Date dateOfIncome;
     short expires;
 
-    public FoodItem(int ID, String name, float price, Date dateOfIncome, short expires) {
-        super(ID, name, price);
-        this.category = Category.FOOD;
-        this.dateOfIncome = dateOfIncome;
+    public FoodItem(String name, float price, FoodItem analog, Date date, short expires) {
+        super(name, price, analog);
+        this.dateOfIncome = date;
         this.expires = expires;
+        this.category = Category.FOOD;
+    }
+
+    public FoodItem(String name, float price, short expires) {
+        this(name, price, null, new Date(), expires);
+    }
+
+    public FoodItem(String name){
+        this(name, 0.0f, null, new Date(), (short)0);
     }
 
     @Override
@@ -26,8 +34,7 @@ class FoodItem extends GenericItem {
             if (this.expires != otherItem.expires || this.dateOfIncome != otherItem.dateOfIncome)
                 return false;
             return true;
-        }
-        else 
+        } else
             return false;
     }
 
