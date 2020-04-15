@@ -64,7 +64,7 @@ public class GenericItem implements Cloneable {
         if (o == null || o.getClass() != this.getClass())
             return false;
         GenericItem otherItem = (GenericItem) o;
-        if (this.ID != otherItem.ID & this.name != otherItem.name & this.price != otherItem.price
+        if (this.name != otherItem.name & this.price != otherItem.price
                 & this.category != otherItem.category)
             return false;
         if (this.hashCode() != otherItem.hashCode())
@@ -77,7 +77,6 @@ public class GenericItem implements Cloneable {
         final int prime = 31;
         int result = 1;
         result = prime * result + name.hashCode();
-        result = prime * result + ID;
         result = prime * result + (int) price;
         return result;
     }

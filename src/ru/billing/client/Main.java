@@ -3,6 +3,7 @@ package ru.billing.client;
 import java.util.Date;
 
 import ru.billing.stocklist.*;
+import ru.itmo.client.CatalogFileLoader;
 
 public class Main {
     public static void main(String[] args) throws Exception {
@@ -80,5 +81,23 @@ public class Main {
         for (int i = 0; i < catalog.size(); i++) {
             catalog.findItemByID(i).printAll();
         }
+
+        // Задание 6-1. Проверка на exception.
+
+        // TechnicalItem item10 = new TechnicalItem("Smart Watch", 18600.99f, (short) 1080);
+        // catalog.addItem(item10);
+
+
+        //Задание 6-3.Потоки ввода-вывода
+        //Загружаем товары из каталога(текстового файла)
+        ItemCatalog catalog2 = new ItemCatalog();
+        CatalogFileLoader cLoader = new CatalogFileLoader("C://Users//msmar//OneDrive//Документы//VS Code_projects//techpro-master//src//ru//billing//client//items.lst.txt");
+        cLoader.load(catalog2);
+        //Проверяем на корректность загрузки списка товаров из файла
+        System.out.println("\n...downloading items from a file...");
+        for (int i = catalog2.getFirstItemID(); i < catalog2.getFirstItemID() + catalog2.size(); i++) {
+            System.out.println(catalog2.findItemByID(i));
+        }
+
     }
 }

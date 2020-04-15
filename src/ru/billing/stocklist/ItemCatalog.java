@@ -3,15 +3,28 @@ package ru.billing.stocklist;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import ru.itmo.exceptions.ItemAlreadyExistsException;
+
 // Упражнение 4-1. Классы-коллекции
 public class ItemCatalog {
     private HashMap<Integer, GenericItem> catalog = new HashMap<Integer, GenericItem>();
     private ArrayList<GenericItem> ALCatalog = new ArrayList<GenericItem>();
 
     // добавляет товар в каталог
-    public void addItem(GenericItem item) {
+    public void addItem(GenericItem item) throws ItemAlreadyExistsException {
+
+        // Проверяем, чтобы не было одинаковых item в каталоге
+        for (GenericItem i : ALCatalog) {
+            if (i.equals(item)) {
+                // Выбрасываем исключение, если нашли одинаковые
+                throw new ItemAlreadyExistsException();
+            }
+
+        }
+
         catalog.put(item.getID(), item); // Добавляем товар в HashMap
         ALCatalog.add(item); // Добавляем тот же товар в ArrayList
+
     }
 
     // распечатывает товары из каталога на экране
@@ -44,6 +57,10 @@ public class ItemCatalog {
 
     public int size() {
         return ALCatalog.size();
+    }
+
+    public int getFirstItemID() {
+        return ALCatalog.get(size() - 1).getID() - size() + 1;
     }
 
 }
